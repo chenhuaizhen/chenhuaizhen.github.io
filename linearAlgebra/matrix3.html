@@ -18,11 +18,124 @@
 			<br/>
 		</div>
 		<hr>
-		<h2 class="header">3. 消除法？矩阵转换？</h2>
+		<h2 class="header">3. 消元法？矩阵转换？</h2>
 		<div class="box">
 			<div class="text">
 				我们继续研究AX=b的问题。
-				
+				<br/><br/>
+				相信各位高中或初中就学过多元函数求解，其实用的都是消元法。只不过这里的表现形式从方程组变成矩阵而已。
+				<br/>
+				我们先来看一组方程式:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/39.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其矩阵表示形式AX=b如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/10.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么要求这个方程组，我们首先想到的就是消元。而最直观的想法就是从上往下逐级消元，比如第一行保留x,y,z，第二行只保留y,z，第三行只有z，这样就能逐级求出方程组的解了。放到矩阵中也是类似，我们可以把矩阵A变成一个<span style="color:red">上三角矩阵</span>(上三角矩阵的对角线左下方的系数全部为零)，其运用的也是消元的思想：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/40.jpg" style="border:none;"/>
+				</div>
+				<br/><br/>
+				我们再来结合下输出结果b，将结果b合并到原先矩阵A后生成的矩阵叫做<span style="color:red">增广矩阵</span>，如下所示：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/41.gif" style="border:none;"/>
+				</div>
+				<br/>
+				将刚刚消元的矩阵换成增广矩阵后变成：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/42.jpg" style="border:none;"/>
+				</div>
+				<br/><br/>
+				其可转换成方程组的形式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/43.gif" style="border:none;"/>
+				</div>
+				<br/>
+				可以容易求出：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/44.gif" style="border:none;"/>
+				</div>
+				<br/>
+				在机器学习里，解方程不是重点，重点是矩阵的性质。所以我们再回过头来看刚刚那个矩阵A：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/45.gif" style="border:none;"/>
+				</div>
+				<br/>
+				假定有一个矩阵U：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/46.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那A可以通过一个矩阵乘法转换成矩阵U么？答案是肯定可以。已知矩阵U是矩阵A的第二行减去第一行的1/3并替代第二行后得到的，那么我们的转换矩阵可以写成下面这种形式:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/47.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				容易验证：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/48.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这条性质很重要，需要发动脑筋想象下具体变化过程，了解转换矩阵的用途。
+				<br/><br/>
+				接下来还有一个性质，如果矩阵U还想继续变化成矩阵V：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/49.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那还需要继续左乘一个转换矩阵：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/50.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				可以验证：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/51.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么，有没有一个转换矩阵可以让矩阵A直接变成矩阵V，由于矩阵乘法遵循乘法结合律，所以有如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/52.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时我们还会问，是否存在一个转换矩阵可以使原矩阵行顺序交换的，答案是存在的：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/53.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那使列顺序交换的呢？这时就不能左乘了，得右乘：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/54.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那是否存在转换矩阵不改变原矩阵的，这种转换矩阵叫做<span style="color:red">单位矩阵</span>（n*n矩阵上主对角线上值全为1，其余值全为0）:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/55.gif" style="border:none;"/>
+				</div>
+				<br/>
+
 			</div><!--text-->
 		</div>
 	</div>
