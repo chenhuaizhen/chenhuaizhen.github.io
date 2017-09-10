@@ -1,0 +1,47 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+a{
+	text-decoration: none;
+	color: blue;
+}
+
+.header{
+	margin:30px 10px;
+}
+
+.time{
+	margin:10px;
+}
+
+.header-s{
+	margin:10px 10px;
+}
+
+.ctx{
+	margin:0 auto;
+	width:780px;
+}
+
+.box{
+	margin:10px 10px;
+}
+
+.text{
+	font-size: 15px;
+	color:black;
+}
+
+.tip{
+	border:1px gray solid;
+	margin:5px 0px;
+	padding:10px;
+	width: 100%;
+}
+
+.pic{
+	margin:0 auto;
+	width: 50%;
+}

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>matrix</title>
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系QQ：1520498543
+			<br/>
+			完成时间：2017-9-8
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">1. 矩阵的直观理解</h2>
+		<div class="box">
+			<div class="text">
+				国内很多教材都是从行列式讲起，但我觉得矩阵其实更直观些，更容易了解线性代数是做什么的，故我从矩阵开始讲起。
+				<br/><br/>
+				首先来看一组方程组
+				<br/><br/>
+				<div class='pic'>
+					<img src="img/0.gif" style="border:none;" />
+					<br/>
+					<img src="img/1.gif" style="border:none;" />
+				</div>
+				<br/>
+				常规算法是直接消元分别求x和y，在这里我们先把它当成一个矩阵看待，以上公式可以转化成<span style='color:red'>AX=b</span>的矩阵相乘形式
+				<br/><br/>
+				<div class="pic">
+					<img src="img/2.gif" style="border:none;"/>
+				</div>
+				<div class="tip">
+					矩阵乘法运算规则，如下例子，不再赘述：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/3.gif" style="border:none;"/>
+					</div>
+				</div>
+				<br/><br/>
+				对于刚刚那个AX=b的式子，矩阵A为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/4.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们可以将其分成两行，再代入AX=b，可以得到如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/5.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/6.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时可以用直线图来表示，x，y分别代表直线图上的坐标，其图像如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/7.jpg" style="border:none;"/>
+				</div>
+				显然两条直线的交点(2,-3)就是该方程AX=b的解。
+				<br/><br/>
+				那么换种思路，我们把矩阵A分成两列，再代入AX=b，可以得到如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/8.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时就不能用直线图来表示了，得改成向量表示，而x，y分别代表的是两个向量的长度，如下图：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/9.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				所有可以得出x，y分别为2和-3，与刚刚直线图交点一致。
+				<br/><br/>
+				那么接下来看下3*3矩阵的例子，如下有一个新的AX=b的例子：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/10.gif" style="border:none;"/>
+				</div>
+				<br/>
+				跟刚刚类似，我们先从行来分解矩阵A，再代入AX=b，得到如下:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/11.gif" style="border:none;"/>
+				</div>
+				<div class="pic">
+					<img src="img/12.gif" style="border:none;"/>
+				</div>
+				<div class="pic">
+					<img src="img/13.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其图像是三个相交的平面，两个平面相交能够得到一条直线，那条直线再与第三个平面相交，能得到一个点，所以三个面相交能得到一个点，图如下：
+				<br/>
+				<div class="pic">
+					<img src="img/14.png" style="border:none;"/>
+				</div>
+				<br/>
+				其交点为(1,1,1)，我们可以验证其代入后符合AX=b
+				<br/><br/>
+				我们再用列分解矩阵A，代入AX=b，得到如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/15.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其向量表示如下图，其中向量OA为(3,1,4)，向量OC为(5,2,10)，向量OD为(7,9,3)，向量AF为向量OC平移到以A点为起点，向量FE为向量OD平移到以F点为起点，故向量OE(15,12,17)=向量OA+OC+OD，所以x,y,z的解为分别为1,1,1，与上个图的交点位置值一致：
+				<br/>
+				<div class="pic">
+					<img src="img/16.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				看到这里，相信各位对矩阵的横向和竖向有了直观上的认识。对于求解AX=b的问题，常用的还是按列分割矩阵。按行分割矩阵有个理解上的限制，如果矩阵的大小是4*4，那么其解的形式就不那么容易用图像表现出来，毕竟4维图像不好想象（如上例子，当矩阵大小为2*2，可以用2维平面坐标表示，当矩阵大小为3*3，可以用3维立体坐标表示）。如果按列分割，无论矩阵多大，都可看作是向量组合的形式，这样便于理解高维矩阵。
+				<br/><br/>
+				下一篇，我们来聊聊<a href="matrix1.html">AX=b的解</a>
+				<br/>
+			</div><!--text-->
+		</div>
+	</div>
+</body>
+</html>
