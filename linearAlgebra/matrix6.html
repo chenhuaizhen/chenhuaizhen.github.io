@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>matrix</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-12
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">6. 置换矩阵？转置矩阵？对称矩阵？</h2>
+		<div class="box">
+			<div class="text">
+				本章内容较短，主要只是简要介绍下相关性质。
+				<br/><br/>
+				首先看下置换矩阵。通过之前章节相信各位对置换矩阵有了一定的了解，那么这时有一个问题，如果只能交换行序，那么对于一个n*n的矩阵，其总共有多少种交换方式？（可以看成是一种排序问题）
+				<br/><br/>
+				结果是n!（n的阶层）种。
+				<br/><br/>
+				换句话说，也就是有n!个置换矩阵存在，而由n!个置换矩阵组成的这组矩阵集，有个很有意思的现象，其内部的各个矩阵无论怎么相乘，或者取逆矩阵，结果都能在这组矩阵集里找到对应的解。换句话说，该矩阵集包含了该矩阵所有的行置换情况。
+				<br/><br/>
+				另外，<span style="color:red">置换矩阵还有一个重要的性质，其转置等于其逆矩阵！</span>
+				<br/>
+				举个例子证明下，对于一个2,3行置换后3,4行再转换的置换矩阵P1：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/79.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么其逆矩阵也是置换3,4行后2,3行再转换的置换矩阵P2：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/80.gif" style="border:none;"/>
+				</div>
+				<br/>
+				不难验证P1*P2=I，同时也可看出P2是P1的置换矩阵。
+				<br/><br/>
+				接下来讲下置换矩阵，其有一个很重要的公式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/81.gif" style="border:none;"/>
+				</div>
+				<br/>
+				而对于对称矩阵，其转置等于本身。而更常见的形式是矩阵A乘以矩阵A的转置得到一个对称矩阵。其证明如下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/82.gif" style="border:none;"/>
+				</div>
+				<br/>
+				对于对称矩阵，在机器学习经常能见到，这里先不细讲，以后遇到再细讲。
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
