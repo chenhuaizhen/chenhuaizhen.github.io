@@ -129,6 +129,20 @@
 				<br/>
 				其中C1，C2都是常数，验证结果正确。
 				<br/><br/>
+				最后，我们再来看一下什么情况下无解。上一章已经通过列空间分析了无解的情况，这里我们简要通过消元计算的形式来分析无解的情况。假定有一个方程AX=b：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/111.gif" style="border:none;"/>
+				</div>
+				<br/>
+				还是用增广矩阵消元得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/112.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时就有一个很明显的性质显示出来，如果b3-b1-b2!=0，那么这条方程无解。如果b3-b1-b2=0，那么方程有无数解（有无数解的原因可看上章内容<a href="matrix1.html" target="_blank">AX=b的解？</a>中关于解个数的分析）
+				<br/><br/>
 				在机器学习里，解方程不是重点，重点是矩阵的性质。所以我们再回过头来看刚刚那个矩阵A：
 				<br/><br/>
 				<div class="pic">
