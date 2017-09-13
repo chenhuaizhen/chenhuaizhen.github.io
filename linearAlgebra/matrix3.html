@@ -14,7 +14,7 @@
 			<br/>
 			联系邮箱：1520498543@qq.com
 			<br/>
-			完成时间：2017-9-10
+			完成时间：2017-9-13
 			<br/>
 		</div>
 		<hr>
@@ -70,10 +70,67 @@
 				上例我们求出了一个唯一解，但上一章我们还发现有存在无数解的情况，那么这些情况该如何处理？
 				<br/><br/>
 				继续给出一个例子：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/102.gif" style="border:none;"/>
+				</div>
 				<br/>
+				我们继续使用增广矩阵消元法来求解：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/103.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				转换成方程的形式得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/104.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时我们可以对X3，X4取自由值（具体原因之后会有章节会详讲，可见<a href="matrix8.html" target="_blank">AX=0？</a>），比如这里我们常用的值是都设为0。所以这里就有一组特解：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/105.gif" style="border:none;"/>
+				</div>
+				<br/>
+				但很明显这组方程有无数个解，那么该如何来表示，这时可以让特解加上常数C倍的零解（AX=0的解），使其代表方程的实际输出。这是为什么？
+				<br/><br/>
+				原因很简单，将特解用X1表示，零解用X2表示，那么A(X1+CX2)=AX1+ACX2=b+C*0=b，所以这组解符合原方程的输出。我们再从图像的角度来分析这组解，特解X1表示的是一个向量，零解X2则表示的是一个空间。不知各位能不能想象出来，一个本来经过零点的空间（零空间必定经过零点），被向量给顶偏移了，最后那个空间就变成了AX=b的解空间。由于例子的解是4维图像比较难画，我们用一个三维空间来画图解释下：
+				<br/><br/>
+				一开始假定零空间为一平面，其必定经过零点：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/106.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				因为加了一个特解进去零空间发生了位移：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/107.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				解空间上面的解都是AX=b的解，同时也符合特解加上C倍的零解这一表现形式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/108.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				回到之前那个例子，其零解为(具体计算过程这里不讲，后面会有一个章节来进行介绍<a href="matrix8.html" target="_blank">AX=0？</a>)
+				<br/><br/>
+				<div class="pic">
+					<img src="img/109.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				所以最后AX=b的解空间为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/110.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中C1，C2都是常数，验证结果正确。
+				<br/><br/>
 				在机器学习里，解方程不是重点，重点是矩阵的性质。所以我们再回过头来看刚刚那个矩阵A：
 				<br/><br/>
-				julizi
 				<div class="pic">
 					<img src="img/45.gif" style="border:none;"/>
 				</div>
