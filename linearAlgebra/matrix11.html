@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>什么是投影矩阵</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-16
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">10. 什么是投影矩阵</h2>
+		<div class="box">
+			<div class="text">
+				投影相信各位都很熟悉，将一条直线投影到一个平面上，可能是一个点，也可能仍然是条直线。那么什么叫投影矩阵？
+				<br/><br/>
+				我们先来看两条向量的投影问题，假设有向量AB和AC：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/135.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				那么AC投影到AB上的向量，就是过C作AB的垂线，AD就是AC投影到AB上的向量。
+				<br/><br/>
+				<div class="pic">
+					<img src="img/136.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				这时向量DC垂直于AB，有：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/137.gif" style="border:none;"/>
+				</div>
+				<br/>
+				求出来的x就是AD占AB的比例，所以AD就求出来了：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/138.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时，我们对这个结果进行一点转化：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/139.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们只是用了乘法结合律，结果就变成了一条很神奇的公式。这时，我们将矩阵P称为投影矩阵（为什么是矩阵？分母是个常数，分子是一列向量乘以一行向量，得到的结果不就是2*2的矩阵）：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/140.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这个矩阵具有两个重要的性质，一是其转置等于本身：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/141.gif" style="border:none;"/>
+				</div>
+				<br/>
+				二是其无论乘以多少个本身结果都是本身，这点不难理解，对向量AC投影一次得到了向量AD，那么再对向量AD投影一次得到了什么？还是AD！无论投影多少次都是AD。这里证明平方的情况：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/142.gif" style="border:none;"/>
+				</div>
+				<br/>
+				以此类推，无论投影多少次都等于本身。
+				<br/><br/>
+				接下来我们看下高维点的情况，在一个三维空间中，如何将点投影到一个面上去。
+				<br/><br/>
+				<div class="pic">
+					<img src="img/143.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				如图，已知点D，平面FGE，要想对点D做一个投影到平面FGE上，首先在D点做一垂线DI垂直平面FGE，而I点就是D点在平面上的投影，那么I点如何求？
+				<br/><br/>
+				按照上个例子的做法，已知向量ID垂直于平面FGE，我们假设平面FGE由两条线性无关的向量FE和FG组成，所以平面可以表示成（向量可看成矩阵的列向量）
+				<br/><br/>
+				<div class="pic">
+					<img src="img/144.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么有：
+				<br/>
+				<div class="pic">
+					<img src="img/145.gif" style="border:none;"/>
+				</div>
+				<div class="pic">
+					<img src="img/146.gif" style="border:none;"/>
+				</div>
+				<br/>
+				整合成矩阵可得
+				<br/>
+				<div class="pic">
+					<img src="img/147.gif" style="border:none;"/>
+				</div>
+				<br/>
+				如果矩阵A可逆（如何判断矩阵可逆，可参考<a href="matrix4.html" target="_blank">矩阵可逆？</a>），那么A的转置乘以A也可逆。那么结果可化成
+				<br/><br/>
+				<div class="pic">
+					<img src="img/148.gif" style="border:none;"/>
+				</div>
+				<br/>
+				可得投影矩阵P为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/149.gif" style="border:none;"/>
+				</div>
+				<br/>
+				对比下向量的投影矩阵，是否十分相似：
+				<br/>
+				<div class="pic">
+					<img src="img/140.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么对于矩阵A的投影矩阵P，是否跟向量的投影矩阵一样有那两个性质呢？
+				<br/><br/>
+				首先还是P的转置等于P：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/150.gif" style="border:none;"/>
+				</div>
+				<br/>
+				接着P的平方等于P：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/151.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么对于更高维的呢？跟三维的一致。已知有一空间为A，那么点D在空间上的投影是多少？令A为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/152.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么点D与投影到空间A上的点I之间的向量正交于空间A。有：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/153.gif" style="border:none;"/>
+				</div>
+				<br/>
+				跟三维空间时一致的论证：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/154.gif" style="border:none;"/>
+				</div>
+				<br/>
+				同样，如果矩阵A可逆，那么投影矩阵P为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/149.gif" style="border:none;"/>
+				</div>
+				<br/>
+				如果矩阵A不可逆，那其投影矩阵怎么求？我觉得可以先将矩阵A中线性相关的向量去掉，那么这样矩阵A就是可逆矩阵了，而且其列空间没变，其投影矩阵也不会变。对于投影矩阵用法，下节来介绍：<a href="matrix12.html">AX=b无解</a>
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
