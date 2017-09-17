@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>讲讲行列式</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-17
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">12. 讲讲行列式</h2>
+		<div class="box">
+			<div class="text">
+				<h3>十大属性</h3>
+				<br/>
+				行列式首先要了解的是其十大属性：
+				<br/><br/>
+				1. 单位矩阵的行列式值为1，记为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/196.gif" style="border:none;"/>
+				</div>
+				<br/>
+				2. 在行列式里，交换行会改变其正负性，即每换一行其值正负交换一次，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/197.gif" style="border:none;"/>
+				</div>
+				<br/>
+				3. 行列式里的每一行单独（注意是单独一行）具有线性性质，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/198.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/199.gif" style="border:none;"/>
+				</div>
+				<br/>
+				4. 如果行列式里有两行相等，那么其行列式为0，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/200.gif" style="border:none;"/>
+				</div>
+				<br/>
+				证明：如果有两行相等，那么交换并不会改变该行列式，但性质2表明其会换号，所以只能为0。
+				<br/><br/>
+				5. 行列式第k行加上第i行的j倍，其值不变，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/201.gif" style="border:none;"/>
+				</div>
+				<br/>
+				证明：可以利用性质3将行列式拆开，再利用性质4得到最终结果：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/202.gif" style="border:none;"/>
+				</div>
+				<br/>
+				6. 如果行列式有一行全为0，那么该行列式值为0，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/203.gif" style="border:none;"/>
+				</div>
+				<br/>
+				证明：可以利用性质3将行列式拆开，0乘以任何数都为0：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/204.gif" style="border:none;"/>
+				</div>
+				<br/>
+				7. 三角矩阵其行列式值为对角线上的值的乘积，举例：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/205.gif" style="border:none;"/>
+				</div>
+				<br/>
+				证明：可以利用性质3先用消元法将矩阵转换成对角矩阵，其行列式值不变，然后利用性质3把对角线上的值提取出来：
+				<br/>
+				<div class="pic">
+					<img src="img/206.gif" style="border:none;"/>
+				</div>
+				<br/>
+				8. 当矩阵是奇异矩阵（奇异矩阵就是矩阵秩小于n的n阶方阵）时，其行列式为0；当矩阵可逆时，其行列式不为0。
+				<br/><br/>
+				证明：当矩阵是奇异矩阵时，肯定能通过消元转换成有一零行的存在，所以行列式为0；当矩阵可逆时，相当于矩阵秩等于n的n阶方阵，其不可能转换成有零行的存在，对角线上也不可能出现0，所以不为0。
+				<br/><br/>
+				9. AB的行列式等于A的行列式乘以B的行列式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/207.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这时有些例子需要说明下：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/208.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/209.gif" style="border:none;"/>
+				</div>
+				<br/>
+				10. A的行列式等于A转置的行列式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/210.gif" style="border:none;"/>
+				</div>
+				<br/>
+				证明：可以利用<a href="matrix5.html" target="_blank">LU分解</a>，由于三角矩阵行列式只跟对角线有关，所以：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/211.gif" style="border:none;"/>
+				</div>
+				<br/>
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

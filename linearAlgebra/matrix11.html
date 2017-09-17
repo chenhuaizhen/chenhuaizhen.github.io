@@ -158,7 +158,57 @@
 					<img src="img/149.gif" style="border:none;"/>
 				</div>
 				<br/>
-				如果矩阵A不可逆，那其投影矩阵怎么求？我觉得可以先将矩阵A中线性相关的向量去掉，那么这样矩阵A就是可逆矩阵了，而且其列空间没变，其投影矩阵也不会变。对于投影矩阵用法，下节来介绍：<a href="matrix12.html">AX=b无解</a>
+				如果矩阵A不可逆，那其投影矩阵怎么求？我觉得可以先将矩阵A中线性相关的向量去掉，那么这样矩阵A就是可逆矩阵了，而且其列空间没变，其投影矩阵也不会变。
+				<br/><br/>
+				现在，我们已经得到了矩阵A的投影矩阵P，那么现在有两个特殊问题需要解决，一是如果需要投影的空间正好存在于矩阵A的列空间里，那么其投影为？假定需要投影的空间为b，其投影为b'，那么有：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/155.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/156.gif" style="border:none;"/>
+				</div>
+				<br/>
+				很明显，如果本来要投影的空间正好在矩阵A的列空间里，那么无论怎么投影都是其本身。
+				<br/><br/>
+				接下来是另一个问题，如果要投影的空间b正交于矩阵A，那么b与A的列空间正交，那么其投影b'为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/157.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/158.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这个比较难想象了，但是如果考虑一下左零空间的概念（如果不知道什么是左零空间，可以参阅<a href="matrix10.html" target="_blank">矩阵的四大子空间</a>），如果b正交于A的列空间，那么b不就存在A的左零空间里了，那么其投影肯定为0。
+				<br/><br/>
+				下面结合之前讲过的子空间的那张图来分析下：
+				<br/>
+				<div class="pic">
+					<img src="img/159.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				对于一个空间b，其投影到矩阵A列空间的b'与其投影到矩阵A左零空间的e都是属于投影。b'就是之前一直所讲的投影矩阵，e则为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/160.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中I-P也是投影矩阵，也满足投影矩阵的两个性质：一是转置等于本身
+				<br/><br/>
+				<div class="pic">
+					<img src="img/161.gif" style="border:none;"/>
+				</div>
+				<br/>
+				二是平方等于本身：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/162.gif" style="border:none;"/>
+				</div>
+				<br/>
+				对于投影矩阵用法，下节来介绍：<a href="matrix12.html">AX=b无解</a>
 			</div><!--text-->
 			<br/><br/><br/><br/>
 			<hr>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>单位正交矩阵与格拉姆-施密特正交化</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-17
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">11. 单位正交矩阵与格拉姆-施密特正交化</h2>
+		<div class="box">
+			<div class="text">
+				特殊矩阵有好多，包括之前见过的对称矩阵，上三角矩阵，下三角矩阵等等，他们都是因为有了存在的意义才会被推崇。那么单位正交矩阵的好处是什么？使计算变简单。
+				<br/><br/>
+				单位正交矩阵A有以下性质：
+				<br/>
+				1. A转置与A相乘为单位矩阵
+				<div class="pic">
+					<img src="img/179.gif" style="border:none;"/>
+				</div>
+				<br/>
+				2. A转置为A的逆，由性质1就可知
+				<br/>
+				3. A内的各组列向量互相正交，且每个列向量的长度都为1
+				<br/><br/>
+				那么如何让计算简单呢？比如要算<a href="matrix12.html" target="_blank">最小二乘法</a>：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/180.gif" style="border:none;"/>
+				</div>
+				<br/>
+				比如要算投影矩阵P：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/181.gif" style="border:none;"/>
+				</div>
+				<br/>
+				即是说，如果要对矩阵A进行处理前，先将矩阵A转换成单位正交矩阵就更有利于后期的处理。那么该如何进行转化？这里介绍一种方法——格拉姆-施密特正交化。
+				<br/><br/>
+				<h3>格拉姆-施密特正交化</h3>
+				<br/>
+				讲这个方法前，得先了解投影矩阵，如果有不熟悉的可参阅<a href="matrix11.html" target="_blank">什么是投影矩阵</a>
+				<br/><br/>
+				先来看列空间为2维的矩阵的转换，已知有两条线性不相关的向量a,b，它们组成了矩阵的列空间：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/182.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				我们先确定向量a不变，然后对b做对a的投影，从<a href="matrix11.html" target="_blank">投影矩阵</a>那节得知可以求得向量e和向量p，对于投影而言，我们需要的是向量p，但对于这次而言，需要的是向量e，如图：：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/183.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				这样我们就得到两条正交的向量A和B，最后再各自分别单位化使长度为1，得到最终的结果q1和q2，其组成的矩阵Q为矩阵A转换后的单位正交矩阵：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/184.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				那么公式该如何表示？首先确定一条向量，比如本次确定的是a，将其作为本次“基底”A:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/185.gif" style="border:none;"/>
+				</div>
+				<br/>
+				然后确定B，就是b对A做投影求B：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/186.gif" style="border:none;"/>
+				</div>
+				<br/>
+				最后分别单位化得q1,q2:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/187.gif" style="border:none;"/>
+				</div>
+				<br/>
+				而由q1,q2组成的矩阵就是原来矩阵的单位正交化矩阵。
+				<br/><br/>
+				我们接下来看下高维的情况，以三维为例，假定有彼此线性无关的向量a,b,c，我们可以先遵循上例把A,B求出来，接下来求C：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/188.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				因为要保持正交，即C与A及C与B都正交，这等价于C与AB组成的空间正交，转换成求C对AB空间的投影的e向量:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/189.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				最后分别单位化即可得到q1,q2,q3:
+				<br/><br/>
+				<div class="pic">
+					<img src="img/190.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				那么用公式该如何表示？首先A,B的确认跟之前一致：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/185.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/186.gif" style="border:none;"/>
+				</div>
+				<br/>
+				然后确定C，因为C与AB组成的平面正交，所以有：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/191.gif" style="border:none;"/>
+				</div>
+				<br/>
+				最后单位化：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/192.gif" style="border:none;"/>
+				</div>
+				<br/>
+				最终就得到了单位正交矩阵的全部列向量q1,q2,q3。
+				<br/><br/>
+				通过刚刚的公式推导，能得到一个一般规律：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/193.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/194.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/195.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这就是格拉姆-施密特正交化。下一节，<a href="matrix14.html">讲讲行列式</a>
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

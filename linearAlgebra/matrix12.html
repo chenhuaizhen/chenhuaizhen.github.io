@@ -43,7 +43,85 @@
 					<img src="img/134.jpg" style="border:none;"/>
 				</div>
 				<br/>
-				那么该直线在数学里面的解释是什么？该直线离各点的距离和最短的。
+				而要求该直线一般用的都是最小二乘法。就以此为例，假定直线为Y=CX+D，那么代入3组X就能求出真实值b与计算值p的误差e，如下图：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/166.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				可得以下公式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/167.gif" style="border:none;"/>
+				</div>
+				<br/>
+				而最小二乘法要求的是f(e)的最小值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/168.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们将x1,x2,x3代入公式，然后用高数求导的方式来求最小值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/169.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这样就把直线给求出来了。接下来我们来做一件有意思的事，我们利用上节所讲的<a href="matrix11.html" target="_blank">投影矩阵</a>来算一下这条直线如何？首先列出公式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/170.gif" style="border:none;"/>
+				</div>
+				<br/>
+				转换成矩阵形式，已知AX=b<span style="color:red">无解</span>：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/171.gif" style="border:none;"/>
+				</div>
+				<br/>
+				但我们知道AX=p有解：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/172.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们要做的是让e的平方和尽可能小：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/173.gif" style="border:none;"/>
+				</div>
+				<br/>
+				这不就是B和P点的两点距离么？
+				<br/><br/>
+				<div class="pic">
+					<img src="img/174.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那么问题就变成了如何在空间A中找到一个点P与B点的距离最短，毋庸置疑P点是B点的投影点。那么我们就可以利用投影矩阵来算X了，分别左右各乘以A的转置来求X：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/175.gif" style="border:none;"/>
+				</div>
+				<br/>
+				将x1,x2,x3,b1,b2,b3数值代入得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/176.gif" style="border:none;"/>
+				</div>
+				<br/>
+				与求导出来的结果一样！所以最小二乘法可以利用投影矩阵公式来计算出最优直线，也就是求出以下的解：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/177.gif" style="border:none;"/>
+				</div>
+				<br/>
+				最后再强调一点，e=(e1,e2,e3)与p正交，e与矩阵A正交，如图就可以看出：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/178.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				ok，下一节再来介绍个特殊的矩阵——<a href="matrix13.html">单位正交矩阵</a>。
 			</div><!--text-->
 			<br/><br/><br/><br/>
 			<hr>
