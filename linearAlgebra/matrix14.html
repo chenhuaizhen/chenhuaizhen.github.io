@@ -123,6 +123,45 @@
 					<img src="img/211.gif" style="border:none;"/>
 				</div>
 				<br/>
+				<h3>行列式计算</h3>
+				<br/>
+				那么行列式该如何计算？我们可以利用消元法将原先矩阵变成三角矩阵后，其对角线上的元素的乘积就是其行列式的值。
+				<br/><br/>
+				此外，我们还有一种通用的行列式求值公式，我们先来看下一个2*2的行列式求值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/212.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们通过刚刚的推导，可以推出n维的行列式的求值，就是不断把原来行列式拆成单元矩阵I后再进行运算。且同时发现，不同行的元素肯定不能处在同一列，因为这会出现一整列为0的情况导致整个行列式为0，所以不同行的元素得处在不同列上。
+				<br/><br/>
+				那么，这里有个问题，n维的行列式其总共有多少个不为0的子行列式组合？答案是n!个，因为我们首先可以确定第一行不为0的元素的位置，总共有n个位置，接下来确定第二行，n-1个位置，第三行n-2个位置，第n行只有一个位置，全部相乘就是n!。
+				<br/><br/>
+				这时我们可以推出一个一般公式，假定有一n*n的矩阵A：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/213.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其行列式的值为：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/214.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中，正负号视具体情况而定。
+				<br/><br/>
+				除此之外，还有另外一种通用的方法，就是行列式展开，这方法基于刚刚那种做法，只是把公式里的数字转换成行列式的形式，这里我不再赘述了，直接引用<a href="https://zh.wikipedia.org/wiki/行列式" target="_blank">维基百科</a>：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/215.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/216.jpg" style="border:none;"/>
+				</div>
+				<br/>
+				行列式不多讲，下一节
 			</div><!--text-->
 			<br/><br/><br/><br/>
 			<hr>
@@ -130,7 +169,10 @@
 			<div class="pic">
 				<img src="../downBack.png" style="border:none;"/>
 			</div>
+            <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
 		</div>
 	</div>
 </body>
+<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 </html>
