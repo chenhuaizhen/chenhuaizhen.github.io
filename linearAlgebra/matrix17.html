@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>特征分解</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-24
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">15. 特征分解</h2>
+		<div class="box">
+			<div class="text">
+				<h3>定义</h3>
+				<br/>
+				我们首先来看一条公式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/238.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中Q由n个线性无关的特征向量组成，Λ为λ组合成的对角矩阵。这条公式在图像处理中十分有用，举个例子如图片的压缩(具体步奏以后会讲)。但是要注意的一点是，并不是所有的矩阵都能特征分解，所以其存在局限性，后面会讲SVD(奇异值分解)就更显优势，应用范围也更广，不过都是后话了，这节重点还是特征分解。
+				<br/><br/>
+				<h3>公式从何来？</h3>
+				<br/>
+				我们先假定有一个n*n的矩阵A，其有n个线性无关的特征向量，将其组合成Q=[q1,q2,……,qn]（注意x为列向量），那么有：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/239.gif" style="border:none;"/>
+				</div>
+				<br/>
+				那两边各右乘Q的逆可得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/240.gif" style="border:none;"/>
+				</div>
+				<br/>
+				当然，两边可以各左乘Q的逆，那么可得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/241.gif" style="border:none;"/>
+				</div>
+				<br/>
+				而这种叫做将矩阵A<span style="color:red">对角化</span>。
+				<br/><br/>
+				另外还有一点需要提醒的是，λ值可以重复，但特征向量一定要有n个线性无关才行。
+				<br/><br/>
+				<h3>公式的简单应用</h3>
+				<br/>
+				已知A有n个线性无关的特征向量，那么A^100等于多少？
+				<br/><br/>
+				<div class="pic">
+					<img src="img/242.gif" style="border:none;"/>
+				</div>
+				<br/>
+				由于Λ是对角矩阵，所以100次幂也很好求：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/243.gif" style="border:none;"/>
+				</div>
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

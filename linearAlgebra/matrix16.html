@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>番外篇 · 矩阵的迹&amp;行列式值&amp;特征值三者关系</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" />
+	<link rel="stylesheet" type="text/css" href="../css/main.css">
+</head>
+<body>
+	<div class='ctx'>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
+		<div class='time'>
+			撰写：CHEN HUAIZHEN
+			<br/>
+			联系邮箱：1520498543@qq.com
+			<br/>
+			完成时间：2017-9-24
+			<br/>
+		</div>
+		<hr>
+		<h2 class="header">番外篇 · 矩阵的迹&amp;行列式值&amp;特征值三者关系</h2>
+		<div class="box">
+			<div class="text">
+				<h3>三者关系</h3>
+				<br/>
+				1. 矩阵的迹(trace)的和与特征值和相等
+				<br/>
+				2. 矩阵的行列式值为特征值的乘积
+				<br/><br/>
+				<h3>从简单例子出发</h3>
+				<br/>
+				假定有一矩阵A：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/219.gif" style="border:none;"/>
+				</div>
+				<br/>
+				用以下公式可以求出特征值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/220.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们将上式进行分解可得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/221.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/222.gif" style="border:none;"/>
+				</div>
+				<br/>
+				进一步求值可得：
+				<br/>
+				<div class="pic">
+					<img src="img/223.gif" style="border:none;"/>
+				</div>
+				<br/>
+				整理下可得：
+				<br/>
+				<div class="pic">
+					<img src="img/224.gif" style="border:none;"/>
+				</div>
+				<br/>
+				我们从另一个角度来看特征值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/225.gif" style="border:none;"/>
+				</div>
+				<br/>
+				将其展开可得：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/226.gif" style="border:none;"/>
+				</div>
+				<br/>
+				跟上式对比：
+				<br/>
+				<div class="pic">
+					<img src="img/224.gif" style="border:none;"/>
+				</div>
+				<br/>
+				可得最开始说的关系公式：
+				<br/>
+				<div class="pic">
+					<img src="img/227.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<div class="pic">
+					<img src="img/228.gif" style="border:none;"/>
+				</div>
+				<br/>
+				<h3>推广到n*n矩阵</h3>
+				<br/>
+				按照3*3的矩阵，我们可以推出n*n的矩阵A求特征值的分解形式：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/229.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中，Ej的定义为消掉(n-j)行和列的特征值后矩阵剩下的全部可能余子式(大小为j*j)的和，余子式的个数为
+				<br/><br/>
+				<div class="pic">
+					<img src="img/231.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中最特别的就是E1和En，E1为trace的和，En为行列式的值。
+				<br/><br/>
+				再从另外一个角度看n*n的矩阵A求特征值：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/232.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中Sj的定义为去掉(n-j)个λ值后剩下的λ乘积的和，其个数同样是：
+				<br/><br/>
+				<div class="pic">
+					<img src="img/231.gif" style="border:none;"/>
+				</div>
+				<br/>
+				其中最特别的也是S1和Sn，S1为所有λ的和，Sn为所有λ的乘积。
+				<br/><br/>
+				对比上面两式，可以得出E1=S1，En=Sn，故矩阵的迹的和等于特征值的和，矩阵的行列式值等于特征值的乘积。
+			</div><!--text-->
+			<br/><br/><br/><br/>
+			<hr>
+			<br/><br/>
+			<div class="pic">
+				<img src="../downBack.png" style="border:none;"/>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
