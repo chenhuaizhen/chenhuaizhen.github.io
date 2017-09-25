@@ -45,3 +45,94 @@ a{
 	width:100%;
 	text-align:center;
 }
+
+.outline{
+	width: 100%;
+	margin:10px 0;
+	margin-bottom: 20px;
+}
+
+.outline-title{
+	font-size: 25px;
+	color:black;
+}
+
+.outline-time{
+	font-size: 15px;
+	color:gray;
+	margin:10px 0;
+}
+
+.outline-ctx{
+	font-size: 15px;
+	color:gray;
+}
+
+.outline-readmore{
+	font-size: 15px;
+	color:black;
+	margin:25px 0;
+}
+
+.rightBar{
+	position: fixed;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	z-index: 10;
+	background: #222;
+	width: 230px;
+}
+
+@media (max-width: 767px){
+	.rightBar {
+    	display: none !important;
+	}
+}
+
+.innerBar{
+    position: relative;
+    padding: 20px 10px;
+    color: #999;
+    text-align: center;
+}
+
+.barPic{
+	text-align: center;
+	margin: 0 auto;
+    padding-top: 30px;
+    width: 100%;
+}
+
+.barName{
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+    width: 100%;
+    color: #f5f5f5;
+    font-weight: normal;
+    font-size: 21px;
+}
+
+.barMenu{
+	text-align: center;
+    width: 100%;
+    color: #999;
+    font-weight: normal;
+
+}
+
+.barMenu ul li{
+	list-style: none;
+}
+
+.barMenu ul li a{
+	text-align: left;
+	color: #999;
+    border-bottom: 1px solid #555;
+    line-height: 30px;
+}
+
+.barMenu ul li a:hover{
+	color:white;
+}

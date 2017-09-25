@@ -7,52 +7,455 @@
 	<link rel="stylesheet" type="text/css" href="../css/main.css">
 </head>
 <body>
+	<div class="rightBar">
+		<div class="innerBar">
+			<div class="barPic">
+				<img src="../Bar.jpg" style="border:none;"/>
+			</div>
+			<div class="barName">GO BU LI</div>
+			<div class="barMenu">
+				<!-- <ul>
+					<li><a href="../index.html">首页</a></li>
+					<li><a href="#">线性代数篇</a></li>
+					<li><a href="#">……</a></li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
 	<div class='ctx'>
-		<h1 class="header">机器学习入门</h1>
+		<h1 class="header">机器学习入门---线性代数篇</h1>
 		<hr>
-		<h2 class="header">2.线性代数</h2>
+		<h2 class="header">说在前头</h2>
 		<div class="box">
 			<div class="text">说在前头，数学对机器学习有什么用？确实在我刚入门的时候是完全忽视数学的，拿着各种框架分分钟把机器学习搞出来还沾沾自喜。但当遇到问题时确总不知道该如何解决，机器学习原理不懂的情况下直接撸代码我觉得如空中楼阁，分分钟会挂还不知道自己的程序是怎么死的，或被人问起如何实现时更是一无所知，这种讨巧式的运用框架我觉得放在机器学习领域里不太适用，但不能否认即使你数学基础为0仍能使用框架来搭建自己的机器学习程序，这也是为什么现如今机器学习火爆的原因之一，各种框架已经把它的门槛降到非常低，所以如果只想实现程序的话可以跳过开头几个数学基础介绍，直接奔入代码实现。但有空闲时间还是建议多多了解原理，这样才能走得更远。
 			<br/><br/>
 			进入正题，线性代数是一门大学必修课，但是相信很多人考完试后都忘的差不多了（包括笔者我），所以这里主要搭建一个整体的系统框架，加强对线性代数的理解和应用。笔者主要是总结网络上各种信息以及加入本人的一点理解，如果有疏漏，还望通知本人，联系QQ为【1520498543】
 			<br/><br/>
-			本章内容：
-			<br/>
-			1.<a href="matrix0.html" target="_blank">矩阵的直观理解</a>
-			<br/>
-			2.<a href="matrix1.html" target="_blank">AX=b的解？</a>
-			<br/>
-			<a href="matrix2.html" target="_blank">番外篇 · 聊聊行秩？=列秩</a>
-			<br/>
-			3.<a href="matrix3.html" target="_blank">消元法？矩阵转换？</a>
-			<br/>
-			4.<a href="matrix4.html" target="_blank">矩阵可逆？</a>
-			<br/>
-			5.<a href="matrix5.html" target="_blank">PA=LU？</a>
-			<br/>
-			6.<a href="matrix6.html" target="_blank">置换矩阵？转置矩阵？对称矩阵？</a>
-			<br/>
-			<a href="matrix7.html" target="_blank">番外篇 · 向量空间</a>
-			<br/>
-			7.<a href="matrix8.html" target="_blank">AX=0？</a>
-			<br/>
-			8.<a href="matrix9.html" target="_blank">正交 = 垂直？</a>
-			<br/>
-			9.<a href="matrix10.html" target="_blank">矩阵的四大子空间</a>
-			<br/>
-			10.<a href="matrix11.html" target="_blank">什么是投影矩阵</a>
-			<br/>
-			11.<a href="matrix12.html" target="_blank">AX=b无解</a>
-			<br/>
-			12.<a href="matrix13.html" target="_blank">单位正交矩阵与格拉姆-施密特正交化</a>
-			<br/>
-			13.<a href="matrix14.html" target="_blank">讲讲行列式</a>
-			<br/>
-			14.<a href="matrix15.html" target="_blank">特征值及特征向量</a>
-			<br/>
-			<a href="matrix16.html" target="_blank">番外篇 · 矩阵的迹&amp;行列式值&amp;特征值三者关系</a>
-			<br/>
-			15.<a href="matrix17.html" target="_blank">特征分解</a>
+			<div class="outline">
+				<a class="outline-title" href="matrix0.html" target="_blank">矩阵的直观理解</a>
+				<div class="outline-time">发表于：2017-9-8</div>
+				<div class="outline-ctx">
+					国内很多教材都是从行列式讲起，但我觉得矩阵其实更直观些，更容易了解线性代数是做什么的，故我从矩阵开始讲起。
+					<br/><br/>
+					首先来看一组方程组
+					<br/><br/>
+					<div class='pic'>
+						<img src="img/0.gif" style="border:none;" />
+						<br/>
+						<img src="img/1.gif" style="border:none;" />
+					</div>
+					<br/>
+					常规算法是直接消元分别求x和y，在这里我们先把它当成一个矩阵看待，以上公式可以转化成<span style='color:red'>AX=b</span>的矩阵相乘形式
+					<br/><br/>
+					<div class="pic">
+						<img src="img/2.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix0.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix1.html" target="_blank">AX=b的解？</a>
+				<div class="outline-time">发表于：2017-9-10</div>
+				<div class="outline-ctx">
+					假定给你一个AX=b的方程，其有多少个解？0个？1个？还是无数个？
+					<br/><br/>
+					我们将该问题转换成<a href="matrix0.html">上一节</a>介绍的按列分割矩阵，也就是问，矩阵A的所有列向量，是否铺满了b的所有维度？
+					<br/><br/>
+					说的通透点，如果b=(x1,x2)，那么b的维度就是2维平面，如果b=(x1,x2,x3)，那么b的维度就是3维空间，如果b=(x1,x2,……,xn)，那么b的维度就是n维空间。
+					<br/><br/>
+					首先来看2维平面的情况，如果矩阵A有两条<span style='color:red'>线性不相关</span>的列向量，那么不就能铺满一个2维平面？
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix1.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix2.html" target="_blank">番外篇 · 聊聊行秩？=列秩</a>
+				<div class="outline-time">发表于：2017-9-10</div>
+				<div class="outline-ctx">
+					为什么行秩=列秩？
+					<br/><br/>
+					我们现将问题简化下，如果有一个3*3的矩阵A，已知其列空间存在线性相关，去掉后只剩下两个向量，那么列空间大小为2维，列秩为2，那么行秩等于多少？
+					<br/>
+					设矩阵A为：
+					<br/>
+					<div class="pic">
+						<img src="img/20.gif" style="border:none;"/>
+					</div>
+					<br/><br/>
+					那么存在一组(x,y)使：
+					<br/>
+					<div class="pic">
+						<img src="img/21.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix2.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix3.html" target="_blank">消元法？矩阵转换？</a>
+				<div class="outline-time">发表于：2017-9-13</div>
+				<div class="outline-ctx">
+					我们继续研究AX=b的问题。
+					<br/><br/>
+					相信各位高中或初中就学过多元函数求解，其实用的都是消元法。只不过这里的表现形式从方程组变成矩阵而已。
+					<br/>
+					我们先来看一组方程式:
+					<br/><br/>
+					<div class="pic">
+						<img src="img/39.gif" style="border:none;"/>
+					</div>
+					<br/>
+					其矩阵表示形式AX=b如下：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/10.gif" style="border:none;"/>
+					</div>
+					<br/>
+					那么要求这个方程组，我们首先想到的就是消元。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix3.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix4.html" target="_blank">矩阵可逆？</a>
+				<div class="outline-time">发表于：2017-9-11</div>
+				<div class="outline-ctx">
+					我们继续研究下转换矩阵，已知矩阵A:
+					<br/><br/>
+					<div class="pic">
+						<img src="img/45.gif" style="border:none;"/>
+					</div>
+					<br/>
+					假定有一个矩阵U：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/46.gif" style="border:none;"/>
+					</div>
+					<br/>
+					那A可以通过一个矩阵乘法转换成矩阵U:
+					<br/><br/>
+					<div class="pic">
+						<img src="img/48.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix4.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix5.html" target="_blank">PA=LU？</a>
+				<div class="outline-time">发表于：2017-9-11</div>
+				<div class="outline-ctx">
+					PA=LU，我们先来看下P是什么？
+					<br/>
+					P矩阵全称为Permutation Matrix，也就是<span style="color:red">置换矩阵</span>。置换矩阵左乘矩阵A，是对A进行行序变换，右乘矩阵A，是对A进行列序变换：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/53.gif" style="border:none;"/>
+					</div>
+					<br/>
+					<div class="pic">	
+						<img src="img/54.gif" style="border:none;"/>
+					</div>
+					<br/>
+					那PA代表的是一个通过转换行序后能够通过消元法变成一个上三角矩阵的矩阵。这句话有点拗口，但是有做过矩阵消元的人都知道，有时比如第一行首位就为0，这样一开始就无法消元，所以得通过转换行序，将首位有数值的行给提到第一行上来后再进行消元动作，所以PA代表的就是将行序确定好能够从上往下消元的矩阵。
+					<br/><br/>
+					那接下来，L代表的是Lower Triangular Matrix(下三角矩阵)，就是对角线上方都为0的矩阵；U代表Upper Triangular Matrix(上三角矩阵)，就是对角线下方都为0的矩阵。那么为什么等式能够成立？
+					<br/>
+					回到之前我们一直所讲的消元，矩阵A通过左乘各类变换矩阵后，最终能够得到一个上三角的矩阵，这样消元就结束了，接下去就可以直接求解了。下面讲个例子。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix5.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix6.html" target="_blank">置换矩阵？转置矩阵？对称矩阵？</a>
+				<div class="outline-time">发表于：2017-9-12</div>
+				<div class="outline-ctx">
+					本章内容较短，主要只是简要介绍下相关性质。
+					<br/><br/>
+					首先看下置换矩阵。通过之前章节相信各位对置换矩阵有了一定的了解，那么这时有一个问题，如果只能交换行序，那么对于一个n*n的矩阵，其总共有多少种交换方式？（可以看成是一种排序问题）
+					<br/><br/>
+					结果是n!（n的阶层）种。
+					<br/><br/>
+					换句话说，也就是有n!个置换矩阵存在，而由n!个置换矩阵组成的这组矩阵集，有个很有意思的现象，其内部的各个矩阵无论怎么相乘，或者取逆矩阵，结果都能在这组矩阵集里找到对应的解。换句话说，该矩阵集包含了该矩阵所有的行置换情况。
+					<br/><br/>
+					另外，<span style="color:red">置换矩阵还有一个重要的性质，其转置等于其逆矩阵！</span>
+					<br/>
+					举个例子证明下，对于一个2,3行置换后3,4行再转换的置换矩阵P1：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/79.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix6.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix7.html" target="_blank">番外篇 · 向量空间</a>
+				<div class="outline-time">发表于：2017-9-12</div>
+				<div class="outline-ctx">
+					我们先来看下一个符号<img src="img/83.gif" style="border:none;"/>，其代表了一个二维的空间，其中空间中的值都是实数，你也可以看作是xy平面。同理，<img src="img/84.gif" style="border:none;"/>代表了一个n维的实数空间。
+					<br/><br/>
+					我们接下来看下空间的定义，什么才能叫作向量空间？
+					<br/>
+					当空间中的任意向量相加或数乘（实数乘以向量）运算时，结果仍然在原来的空间里，这才能叫作向量空间，其是一个“封闭”的空间。同时有一点非常重要，向量空间永远都能经过零点（或零向量）。因为数乘运算时，你完全可以乘以0，得到的结果也一定是零点（或零向量）。
+					<br/>
+					比如对于一个二维向量空间<img src="img/83.gif" style="border:none;"/>，其可以想象成一个xy平面，而平面上任意向量相加或数乘的结果，仍然在这个平面上，这点是毋庸置疑的。
+					<br/><br/>
+					了解了向量空间后，我们再来看下子空间的概念。对于一个<img src="img/83.gif" style="border:none;"/>的向量空间而言，其有多少种子空间？
+					<br/><br/>
+					1. 我们首先可以确定的是<img src="img/83.gif" style="border:none;"/>本身就是其子空间，同时也是最大的子空间；
+					<br/><br/>
+					2. 其次我们能确定的是零向量(0,0)也是其一个子空间。首先其包含在<img src="img/83.gif" style="border:none;"/>里面，其次其也符合空间的定义，无论相加或数乘都为(0,0)，所以其也算一个子空间，同时也是最小的子空间；
+					<br/><br/>
+					3. 我们先来考虑一个问题，其第一象限的空间算不算其一个子空间。其确实是包含在<img src="img/83.gif" style="border:none;"/>里，空间里向量相加也是存在第一象限里，同样符合。但是如果数乘运算，你乘以一个负数，其位于第三象限里了，不再符合空间的定义，那么其很明显就不是一个子空间。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix7.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix8.html" target="_blank">AX=0？</a>
+				<div class="outline-time">发表于：2017-9-12</div>
+				<div class="outline-ctx">
+					之前有个章节<a href="matrix1.html" target="_blank">AX=b的解？</a>讲了X的存在与否问题。但对于本章节来说，解是一定存在的，因为至少有个解是零向量。也可以用新学习的知识，因为矩阵的列空间是一子空间，而子空间一定经过零点，所以零点位于矩阵的列空间里，就一定有解。
+					<br/><br/>
+					下面引入一个新的名词，叫<span style="color:red">零空间</span>，不同于之前看过的列空间或行空间，零空间的组成成分来自于X而不是矩阵A本身。那么零空间是不是一个子空间？我们可以简易验证下，假如存在向量AX1=0,AX2=0，首先验证下加法是否成立，A(X1+X2)=0，成立。接下来验证数乘是否成立，AkX1=kAX1=0（其中k是常数），成立。其完全符合子空间的定义，所以零空间是一个子空间。
+					<br/><br/>
+					那么对于一个m*n的矩阵而言，其零空间是<img src="img/84.gif" style="border:none;"/>空间的子空间。为什么？因为矩阵的列数就是X的个数，而X的个数就是其向量空间的维数。
+					<br/><br/>
+					了解零空间的基本概念后，我们来看看如何算出其零空间，即如何求出X的值？
+					<br/><br/>
+					先给个例子，对于AX=0，我们先给出一个矩阵A：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/87.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix8.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix9.html" target="_blank">正交 = 垂直？</a>
+				<div class="outline-time">发表于：2017-9-15</div>
+				<div class="outline-ctx">
+					首先讲下正交的定义，我们先来看下向量。向量的正交简单来讲就是当向量A与向量B内积为0时，A与B正交。即是说如果有向量A:
+					<br/><br/>
+					<div class="pic">
+						<img src="img/113.gif" style="border:none;"/>
+					</div>
+					<br/>
+					向量B:
+					<br/><br/>
+					<div class="pic">
+						<img src="img/114.gif" style="border:none;"/>
+					</div>
+					<br/>
+					它们的内积为0：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/115.gif" style="border:none;"/>
+					</div>
+					<br/>
+					这时就说A与B正交。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix9.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix10.html" target="_blank">矩阵的四大子空间</a>
+				<div class="outline-time">发表于：2017-9-16</div>
+				<div class="outline-ctx">
+					四大子空间，听起来就跟四大天王一样。下面要放一张号称很无敌又很常见的图来炫耀一下知识了：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/123.jpg" style="border:none;"/>
+					</div>
+					<br/>
+					这张图顺便可以帮忙我们整理下之前所讲过的内容。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix10.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix11.html" target="_blank">什么是投影矩阵</a>
+				<div class="outline-time">发表于：2017-9-16</div>
+				<div class="outline-ctx">
+					投影相信各位都很熟悉，将一条直线投影到一个平面上，可能是一个点，也可能仍然是条直线。那么什么叫投影矩阵？
+					<br/><br/>
+					我们先来看两条向量的投影问题，假设有向量AB和AC：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/135.jpg" style="border:none;"/>
+					</div>
+					<br/>
+					那么AC投影到AB上的向量，就是过C作AB的垂线，AD就是AC投影到AB上的向量。
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix11.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix12.html" target="_blank">AX=b无解</a>
+				<div class="outline-time">发表于：2017-9-17</div>
+				<div class="outline-ctx">
+					乍看下，这个问题之前不是提过么？AX=b什么时候无解，可以从行空间消元分析，也可以从秩来分析解的情况。但是今天要讲的是即使AX=b无解，那么求出一个最接近的解也是可以的。问题是怎么求？
+					<br/><br/>
+					这时有人会问为什么要求一个接近的解，我们来举个机器学习常见的例子，比如有三个点A(2,1),B(4,3),C(6,3)，那如果有一个点D其横坐标为7，那么其纵坐标最有可能是多少？
+					<br/><br/>
+					首先看下A，B，C的点的分布情况：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/132.jpg" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix12.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix13.html" target="_blank">单位正交矩阵与格拉姆-施密特正交化</a>
+				<div class="outline-time">发表于：2017-9-17</div>
+				<div class="outline-ctx">
+					特殊矩阵有好多，包括之前见过的对称矩阵，上三角矩阵，下三角矩阵等等，他们都是因为有了存在的意义才会被推崇。那么单位正交矩阵的好处是什么？使计算变简单。
+					<br/><br/>
+					单位正交矩阵A有以下性质：
+					<br/>
+					1. A转置与A相乘为单位矩阵
+					<div class="pic">
+						<img src="img/179.gif" style="border:none;"/>
+					</div>
+					<br/>
+					2. A转置为A的逆，由性质1就可知
+					<br/>
+					3. A内的各组列向量互相正交，且每个列向量的长度都为1
+					<br/><br/>
+					那么如何让计算简单呢？比如要算<a href="matrix12.html" target="_blank">最小二乘法</a>：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/180.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix13.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
+			<div class="outline">
+				<a class="outline-title" href="matrix14.html" target="_blank">讲讲行列式</a>
+				<div class="outline-time">发表于：2017-9-17</div>
+				<div class="outline-ctx">
+					<h3>十大属性</h3>
+					<br/>
+					行列式首先要了解的是其十大属性：
+					<br/><br/>
+					1. 单位矩阵的行列式值为1，记为：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/196.gif" style="border:none;"/>
+					</div>
+					<br/>
+					2. 在行列式里，交换行会改变其正负性，即每换一行其值正负交换一次，举例：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/197.gif" style="border:none;"/>
+					</div>					
+				</div>
+				<div class="outline-readmore"><a href="matrix14.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix15.html" target="_blank">特征值及特征向量</a>
+				<div class="outline-time">发表于：2017-9-25</div>
+				<div class="outline-ctx">
+					<h3>定义</h3>
+					<br/>
+					我们首先来看一条公式：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/217.gif" style="border:none;"/>
+					</div>
+					<br/>
+					这时，我们可以把λ称为矩阵A的特征值，把x称为矩阵A的特征向量。我们也可以这么说，Ax与x方向平行，而λ是x的长度伸缩大小。同时还有一点需要提起，就是λ可以为0，这时就转换成了Ax=0的问题，也就是求A的零空间了，即其零空间的向量都是λ=0时的特征向量。不过，零向量一般不考虑为特征向量，因为没意义。
+					<br/><br/>
+					比如说下图，AB=(1,1)为矩阵A的特征向量，其特征值为3。
+					<br/><br/>
+					<div class="pic">
+						<img src="img/218.jpg" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix15.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix16.html" target="_blank">番外篇 · 矩阵的迹&amp;行列式值&amp;特征值三者关系</a>
+				<div class="outline-time">发表于：2017-9-24</div>
+				<div class="outline-ctx">
+					<h3>三者关系</h3>
+					<br/>
+					1. 矩阵的迹(trace)的和与特征值和相等
+					<br/>
+					2. 矩阵的行列式值为特征值的乘积
+					<br/><br/>
+					<h3>从简单例子出发</h3>
+					<br/>
+					假定有一矩阵A：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/219.gif" style="border:none;"/>
+					</div>
+					<br/>
+					用以下公式可以求出特征值：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/220.gif" style="border:none;"/>
+					</div>
+				</div>
+				<div class="outline-readmore"><a href="matrix16.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+			
+			<div class="outline">
+				<a class="outline-title" href="matrix17.html" target="_blank">特征分解</a>
+				<div class="outline-time">发表于：2017-9-24</div>
+				<div class="outline-ctx">
+					<h3>定义</h3>
+					<br/>
+					我们首先来看一条公式：
+					<br/><br/>
+					<div class="pic">
+						<img src="img/238.gif" style="border:none;"/>
+					</div>
+					<br/>
+					其中Q由n个线性无关的特征向量组成，Λ为λ组合成的对角矩阵。这条公式在图像处理中十分有用，举个例子如图片的压缩(具体步奏以后会讲)。但是要注意的一点是，并不是所有的矩阵都能特征分解，所以其存在局限性，后面会讲SVD(奇异值分解)就更显优势，应用范围也更广，不过都是后话了，这节重点还是特征分解。
+					<br/><br/>
+					<h3>公式从何来？</h3>
+					<br/>
+					我们先假定有一个n*n的矩阵A，其有n个线性无关的特征向量，将其组合成Q=[q1,q2,……,qn]（注意x为列向量），那么有：
+					<br/>
+				</div>
+				<div class="outline-readmore"><a href="matrix17.html" target="_blank">阅读全文</a></div>
+				<hr>
+			</div>
+
 			</div>
 		</div>
 	</div>
