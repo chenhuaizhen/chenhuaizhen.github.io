@@ -1,1 +1,1 @@
-you can visit the <a href="chenhuaizhen.github.io">blog</a>
+you can visit the <a href="http://chenhuaizhen.github.io">blog</a>
