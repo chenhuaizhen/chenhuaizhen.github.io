@@ -127,16 +127,24 @@ function drawObjectiveOne(data){
   	let x3 = d3.scaleLinear().rangeRound([0,width/2-middle/2]);
   	
   	let data_owner = copyArray(data['owner']);
+  	let max_owner = 0;
   	let data_non = new Array();
 	for(d in data['all']){
 		data_non.push(data['all'][d]-data['owner'][d]);
+		if(data['owner'][d]>max_owner){
+			max_owner = data['owner'][d];
+		}
 	}
 	data_owner = data_owner.reverse();
 	data_non = data_non.reverse();
 
   	y.domain(data_owner.map(function(d,i) { return i; }));
 	x1.domain([0, d3.max(data_owner, function(d) { return d})]).nice();
-	x2.domain([0, d3.max(data_owner, function(d) { return d})]).nice();
+	if(max_owner==0){
+		x2.domain([0, 100]).nice();
+	}else{
+		x2.domain([0, max_owner]).nice();
+	}
 	x3.domain([0, d3.max(data_non, function(d) { return d})]).nice();
 
 	d_o = g.append("g")
