@@ -111,22 +111,8 @@ function copyArray(arr){
 	return res;
 }
 function drawObjectiveOne(data){
-	let svg = d3.select("#object1")
-				.append("svg")
-				.attr("width",1100)
-				.attr("height",800),
-    	margin = {top: 20, right: 80, bottom: 20, left: 80},
-    	width = +svg.attr("width") - margin.left - margin.right,
-    	height = +svg.attr("height") - margin.top - margin.bottom,
-    	g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-    let middle = 60
-    let y = d3.scaleBand().rangeRound([0, height]).paddingInner(0.1);
-  	let x1 = d3.scaleLinear().rangeRound([0,width/2-middle/2]);
-  	let x2 = d3.scaleLinear().rangeRound([width/2-middle/2,0]);
-  	let x3 = d3.scaleLinear().rangeRound([0,width/2-middle/2]);
-  	
-  	let data_owner = copyArray(data['owner']);
+	// data prepocessing
+	let data_owner = copyArray(data['owner']);
   	let max_owner = 0;
   	let data_non = new Array();
 	for(d in data['all']){
@@ -138,21 +124,37 @@ function drawObjectiveOne(data){
 	data_owner = data_owner.reverse();
 	data_non = data_non.reverse();
 
+	let svg = d3.select("#object1")
+				.append("svg")
+				.attr("width",1100)
+				.attr("height",800),
+    	margin = {top: 20, right: 80, bottom: 20, left: 80},
+    	width = +svg.attr("width") - margin.left - margin.right,
+    	height = +svg.attr("height") - margin.top - margin.bottom,
+    	g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+    let middle = 60
+    let y = d3.scaleBand().rangeRound([0, height]).paddingInner(0.1); // location of each bar's y axis
+  	let x1 = d3.scaleLinear().rangeRound([0,width/2-middle/2]); // length of each left-bar
+  	let x2 = d3.scaleLinear().rangeRound([width/2-middle/2,0]); // prepare for the left-X-axis
+  	let x3 = d3.scaleLinear().rangeRound([0,width/2-middle/2]); // length of each right-bar
+
   	y.domain(data_owner.map(function(d,i) { return i; }));
 	x1.domain([0, d3.max(data_owner, function(d) { return d})]).nice();
 	if(max_owner==0){
 		x2.domain([0, 100]).nice();
 	}else{
 		x2.domain([0, max_owner]).nice();
-	}
+	} // if all the owner's data is zero it can also display the left-X-axis
 	x3.domain([0, d3.max(data_non, function(d) { return d})]).nice();
 
+	// add the left bar chart
 	d_o = g.append("g")
 	.selectAll("g")
 	.data(data_owner)
 	.enter().append("g")
-	  // .attr("transform", function(d) { return "translate(0,0)"; })
 	d_o.append("rect")
+	  // in order to control the mouseover animation we need to set the specific id
 	  .attr("id", function(d,i) { return "bar" + i; })
 	  .attr("class", "owner")
 	  .attr("x", function(d) { return width/2-middle/2-x1(d); })
@@ -160,6 +162,7 @@ function drawObjectiveOne(data){
 	  .attr("height", y.bandwidth())
 	  .attr("width", function(d) { return 0; })
 	  .attr("fill", "#FFEEB8")
+	  // in order to show the animation at the left side we need to rotate all bars by 180 degrees
 	  .attr("transform", function(d,i){ return "rotate(180,"+(width/2-middle/2-x1(d)/2) + "," + (y(i)+y.bandwidth()/2) + ")"})
 	  .on("mouseover", function(d) {
 	  	idstr = this.id
@@ -174,22 +177,25 @@ function drawObjectiveOne(data){
         idstrchange = idstr.replace("bar","text")
         d3.selectAll("."+idstrchange).attr("display","none")
       });
+
+    // add the left bar label(the number of each bar)
 	d_o.append("text")
 	  .attr("class", function(d,i) { return "text" + i; })
-      .attr("x", function(d) { return width/2-middle/2-x1(d)-15;})
+      .attr("x", function(d) { return width/2-middle/2-x1(d)-5;})
       .attr("y", function(d,i) { return y(i)+11; })
       .attr("fill", "black")
-      .attr("text-anchor", "middle")
+      .attr("text-anchor", "end")
       .attr("font-size", "12px")
       .attr("display", "none")
       .text(function(d) { return d; })
 
+    // add the right bar chart
 	d_n = g.append("g")
 	.selectAll("g")
 	.data(data_non)
 	.enter().append("g")
-	  // .attr("transform", function(d) { return "translate(0,0)"; })
 	d_n.append("rect")
+	  // in order to control the mouseover animation we need to set the specific id
 	  .attr("id", function(d,i) { return "bar" + i; })
 	  .attr("class", "non")
 	  .attr("x", function(d) { return width/2+middle/2; })
@@ -210,16 +216,32 @@ function drawObjectiveOne(data){
         idstrchange = idstr.replace("bar","text")
         d3.selectAll("."+idstrchange).attr("display","none")
       });
+
+    // add the right bar label(the number of each bar)
 	d_n.append("text")
 	  .attr("class", function(d,i) { return "text" + i; })
-      .attr("x", function(d) { return width/2+middle/2+x3(d)+18;})
+      .attr("x", function(d) { return width/2+middle/2+x3(d)+5;})
       .attr("y", function(d,i) { return y(i)+11; })
       .attr("fill", "black")
-      .attr("text-anchor", "middle")
+      .attr("text-anchor", "start")
       .attr("font-size", "12px")
       .attr("display", "none")
       .text(function(d) { return d; })
 
+    // animation of the left-bar-chart
+    g.selectAll("rect.owner")
+	    .data(data_owner)
+	    .transition()
+	    .duration(1000)
+	    .attr("width",function(d) { return x1(d); });
+	// animation of the right-bar-chart
+	g.selectAll("rect.non")
+	    .data(data_non)
+	    .transition()
+	    .duration(1000)
+	    .attr("width",function(d) { return x3(d); });
+
+	// add the middle y-axis
 	g.append("g")
 	  .attr("transform", function(d) { return "translate(0,11)"; })
       .selectAll("text.week")
@@ -233,29 +255,18 @@ function drawObjectiveOne(data){
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
       .text(function(d) { return "week "+(d+1); });
-
-	g.selectAll("rect.owner")
-	    .data(data_owner)
-	    .transition()
-	    .duration(1000)
-	    .attr("width",function(d) { return x1(d); });
-
-	g.selectAll("rect.non")
-	    .data(data_non)
-	    .transition()
-	    .duration(1000)
-	    .attr("width",function(d) { return x3(d); });
-
+    // add the x-axis of left-bar-chart
 	g.append("g")
 	  .attr("class", "axis")
 	  .attr("transform", "translate(0," + height + ")")
 	  .call(d3.axisBottom(x2))
-
+	// add the x-axis of right-bar-chart
 	g.append("g")
 	  .attr("class", "axis")
 	  .attr("transform", "translate("+ (width/2+middle/2) + "," + height + ")")
 	  .call(d3.axisBottom(x3))
 
+	// add the title of right-bar-chart
 	g.append("text")
 	  .attr("x", width/2-middle/2)
 	  .attr("y", -10)
@@ -266,7 +277,7 @@ function drawObjectiveOne(data){
 	  .attr("font-variant", "small-caps")
 	  .attr("letter-spacing", 1)
 	  .text("repository owner");
-
+	// add the title of left-bar-chart
 	g.append("text")
 	  .attr("x", width/2 + middle/2)
 	  .attr("y", -10)
@@ -311,41 +322,35 @@ function drawObjectiveTwo(data,maxValue){
     	g = svg.append("g").attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     let legendLength = height
-    let x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1);
-    let y = d3.scaleBand().rangeRound([0, height]).paddingInner(0.1);
-    let z = d3.scaleLinear().rangeRound([0,legendLength]);
+    let x = d3.scaleBand().rangeRound([0, width]).paddingInner(0.1); // location of each rectangle's x-axis
+    let y = d3.scaleBand().rangeRound([0, height]).paddingInner(0.1); // location of each rectangle's y-axis
+    let z = d3.scaleLinear().rangeRound([0,legendLength]); // prepare for the right legend's axis
     x.domain(d3.range(26).map(function(i){return i;}));
 	y.domain(d3.range(7).map(function(i){return i;}));
 	z.domain([maxValue,0]);
+
+	// used for show detailed information(number of commits)
 	let divTooltip = d3.select("#object2").append("div").attr("class", "toolTip");
 
-	// console.log(data)
-	let colorMap = d3.interpolateRgb(
-	  d3.rgb('#d6e685'),
-	  d3.rgb('#1e6823')
-	);
-
+	// add rectangles into the plot
 	g.append("g")
 	.selectAll("g")
 	.data(data)
 	.enter().append("g")
 	.append("rect")
 	  .attr("class", "commit")
+	  // in order to split the working hours from the plot
 	  .attr("x", function(d) { 
 	  	let temp = d[1];
-	  	if(d[1] > 7){
-	  		temp += 1;
-	  	}
-	  	if(d[1] > 18){
-	  		temp += 1
-	  	}
+	  	if(d[1] > 7){ temp += 1; }
+	  	if(d[1] > 18){ temp += 1; }
 	  	return x(temp); 
 	  })
 	  .attr("y", function(d) { return y(d[0]); })
 	  .attr("height", y.bandwidth())
 	  .attr("width", x.bandwidth())
-	  .attr("fill", "#d6e685")
-	  .on("mouseover", function(d) {
+	  .attr("fill", "#d6e685") // the initial color
+	  .on("mouseover", function(d) { // show the tooltip dynamically
 	  	divTooltip.style("left", d3.event.pageX+10+"px");
         divTooltip.style("top", d3.event.pageY-25+"px");
         divTooltip.style("display", "inline-block");
@@ -356,20 +361,13 @@ function drawObjectiveTwo(data,maxValue){
         elementData = elements[l].__data__
         divTooltip.html(d[2] + " commits during " +d[1]+":00 on "+ getDay(d[0]));
       })
-      .on("mouseout", function(d) {
-      	divTooltip.style("display", "none");
-      });
+      .on("mouseout", function(d) { divTooltip.style("display", "none"); });
 
-    // g.selectAll("rect.commit")
-    //   .data(data)
-    //   .transition()
-    //   .duration(1000)
-    //   .attr("fill",function(d){return colorMap(d[2]/maxValue)});
-
+    // add the day-axis(Y-axis) into plot
 	g.append("g")
 	  .attr("transform", function(d) { return "translate(0,0)"; })
       .selectAll("text.day")
-      .data(d3.range(7))
+      .data(d3.range(7)) // a week has 7 days
       .enter()
       .append("text")
       .attr("class", "day")
@@ -378,36 +376,30 @@ function drawObjectiveTwo(data,maxValue){
       .attr("fill", "black")
       .attr("text-anchor", "end")
       .attr("font-size", "12px")
-      .text(function(d) { return getDay(d); });
+      .text(function(d) { return getDay(d); }); // getDay(): transfer the number into string(such as 0->Sunday)
 
+    // add the hour-axis(X-axis) into plot
     g.append("g")
 	  .attr("transform", function(d) { return "translate(0,0)"; })
       .selectAll("text.hour")
-      .data(d3.range(26))
+      .data(d3.range(26)) // one day has 24 hours and add 2 more as dividing bars
       .enter()
       .append("text")
       .attr("class", "hour")
-      .attr("x", function(d) { 
-      	return x(d)+x.bandwidth()/2; 
-      })
+      .attr("x", function(d) { return x(d)+x.bandwidth()/2; })
       .attr("y", -10)
       .attr("fill", "black")
       .attr("text-anchor", "middle")
       .attr("font-size", "12px")
-      .text(function(d) { 
+      .text(function(d) { // in order to split the working hour from the plot
       	let temp = d;
-      	if(d == 8 || d == 20){
-      		return "";
-      	}
-	  	if(d > 8){
-	  		temp -= 1;
-	  	}
-	  	if(d > 19){
-	  		temp -= 1
-	  	}
+      	if(d == 8 || d == 20){ return ""; } // blank as dividing bars
+	  	if(d > 8){ temp -= 1; }
+	  	if(d > 19){ temp -= 1 }
       	return temp + ":00"; 
       });
-
+    
+    // add the texts into dividing bars
     let text = g.append("g");
     ((str)=>{
     	for(let i=0;i<str.length;i++){
@@ -422,7 +414,6 @@ function drawObjectiveTwo(data,maxValue){
 		      .text(str[i]);
     	}
     })("WORKING HOUR");
-
     ((str)=>{
     	for(let i=0;i<str.length;i++){
     		text.append("text")
@@ -437,6 +428,8 @@ function drawObjectiveTwo(data,maxValue){
     	}
     })("WORKING HOUR")
 
+    // add the legend with gradient colors
+    // initial the gradient colors
 	let linearGradient = g.append("g")
 	  .append("linearGradient")
 	  	.attr("id","linearColor")  
@@ -450,30 +443,32 @@ function drawObjectiveTwo(data,maxValue){
     let stop2 = linearGradient.append("stop")
         .attr("offset","100%")  
         .style("stop-color","#1e6823");
-
     let legend = g.append("g")
+    // add the legend rectangle
 	legend.append("rect")
 	  .attr("x", width + 20)
 	  .attr("y", 0)
 	  .attr("height", legendLength)
 	  .attr("width", x.bandwidth()/2)
 	  .attr("fill", "url(#" + linearGradient.attr("id") + ")");
+	// add the legend axis
 	legend.append("g")
 	  .attr("class", "axis")
 	  .attr("transform", "translate("+ (width + 20 + x.bandwidth()/2) + ",0)")
 	  .call(d3.axisRight(z).ticks(5))
 
 }
-
+// used to show the animation of changing different colors
 function objectTwoAnimate(data,maxValue){
 	let svg = d3.select("#object2").select("svg"),
     	g = svg.select("g");
 
-    let colorMap = d3.interpolateRgb(
+    // used for show the different number of commits using different colors
+	let colorMap = d3.interpolateRgb(
 	  d3.rgb('#d6e685'),
 	  d3.rgb('#1e6823')
 	);
-
+	// add an animation
     g.selectAll("rect.commit")
       .data(data)
       .transition()
@@ -482,8 +477,9 @@ function objectTwoAnimate(data,maxValue){
 }
 
 function drawObjectiveThree(d_data,w_data,s_data,owner){
-	let wholeHeight_a = Math.ceil(s_data.children.length / 16) * 600;
-	let wholeHeight_b = Math.ceil(w_data.length / 39) * 600;
+	// let the plot can fit different sizes of the data
+	let wholeHeight_a = Math.ceil(s_data.children.length / 15) * 600;
+	let wholeHeight_b = Math.ceil(w_data.length / 38) * 600;
 	let wholeHeight = wholeHeight_a > wholeHeight_b ? wholeHeight_a : wholeHeight_b;
 	let svg = d3.select("#object3")
 				.append("svg")
@@ -495,6 +491,7 @@ function drawObjectiveThree(d_data,w_data,s_data,owner){
     	radius = 250,
     	g = svg.append("g").attr('transform', 'translate(' + (+svg.attr("width"))/2 + ',' + 300 + ')');
 
+   	// this plot needs a lot of different colors
 	let d3_category70 = [
 	0xd3fe14, 0xfec7f8, 0x0b7b3e, 0x0bf0e9, 0xc203c8, 0xfd9b39, 0x888593, 
 	0x906407, 0x98ba7f, 0xfe6794, 0x10b0ff, 0xac7bff, 0xfee7c0, 0x964c63, 
@@ -506,88 +503,104 @@ function drawObjectiveThree(d_data,w_data,s_data,owner){
 	0x73616f, 0xf097c6, 0xfc8772, 0x92a6fe, 0x875b44, 0x699ab3, 0x94bc19, 
 	0x7d5bf0, 0xd24dfe, 0xc85b74, 0x68ff57, 0xb62347, 0x994b91, 0x646b8c, 
 	0x977ab4, 0xd694fd, 0xc4d5b5, 0xfdc4bd, 0x1cae05, 0x7bd972, 0xe9700a];
-
+	// transfer the above color code to d3.rgb
 	function d3_rgbString (value) {
 		return d3.rgb(value >> 16, value >> 8 & 0xff, value & 0xff);
 	}
+	let color = d3.scaleOrdinal(d3_category70.map((c)=>{return d3_rgbString(c);}));
 
-    // x.domain(d3.range(26).map(function(i){return i;}));
-	// y.domain(d3.range(7).map(function(i){return i;}));
-	// console.log(w_data);
-	// console.log(s_data);
-	let _data = new Array();
-	for(let key in w_data){
-		let temp = new Array();
-		temp['key'] = key;
-		temp['value'] = w_data[key];
-		_data.push(temp);
-	}
-
+	// prepare for the sunburst chart
 	let formatNumber = d3.format(",d");
-
-	let x = d3.scaleLinear()
-	    .range([0, 2 * Math.PI]);
-
-	let y = d3.scaleSqrt()
-	    .range([0, radius]);
-
-	let color = d3.scaleOrdinal(d3_category70);
-
+	let x = d3.scaleLinear().range([0, 2 * Math.PI]);
+	let y = d3.scaleSqrt().range([0, radius]);
 	let partition = d3.partition();
-
 	let arc = d3.arc()
 	    .startAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x0))); })
 	    .endAngle(function(d) { return Math.max(0, Math.min(2 * Math.PI, x(d.x1))); })
 	    .innerRadius(function(d) { return Math.max(0, y(d.y0)); })
 	    .outerRadius(function(d) { return Math.max(0, y(d.y1)); });
-	
-	let root = d3.hierarchy(s_data, function(d) { return d.children });
-	root.sum(function(d) { return d.size; });
-	// console.log(root);
+	let root = d3.hierarchy(s_data, function(d) {return d.children; });
+	root.sum(function(d) { return d.size; }); // calculate the size of different areas in sunburst chart
+	// add the sunburst chart
+	g.selectAll("path")
+	  .data(partition(root).descendants())
+	.enter().append("path")
+	  .attr("d", arc)
+	  .attr("fill-rule", "evenodd")
+      .style('stroke', '#fff')
+	  .style("fill", function(d) { return color(d.data.name); })
+	  .on("click", click)
+	.append("title")
+	  .text(function(d) { return d.data.name + "\nTotal bytes:" + formatNumber(d.value); });
 
-	let barLength = d3.scaleLinear().rangeRound([0,125]);
-	let sizeWhole = 0;
-	for(let dd in w_data){
-		sizeWhole += w_data[dd].size;
-	}
+	let barLength = d3.scaleLinear().rangeRound([0,125]); // prepare for the bar chart at the left side
+	let sizeWhole = d3.sum(w_data,function(d){return d.size;});
 	barLength.domain([0, sizeWhole]).nice();
-	let barchart = svg.append("g")
-		.selectAll("rect")
-		.data(w_data)
-		.enter()
-	rect_barchart = barchart.append("rect")
+	let w_barchart = svg.append("g"); // prepare for the parent node of bar chart
+	w_barchart.append("text").attr("x", 95).attr("y", margin.top).attr("fill", "black")
+      .attr("text-anchor", "end").attr("font-size", "15px").text("Languages") // add the title of bar chart
+	w_barchart.append("text").attr("x", 100).attr("y", margin.top).attr("fill", "black")
+      .attr("text-anchor", "start").attr("font-size", "15px").text("(Bytes / Percentage)") // add the title of bar chart
+	let barchart = w_barchart.selectAll("rect").data(w_data).enter();
+	rect_barchart = barchart.append("rect") // add the rectangles
 	  .attr("class", "barchart")
 	  .attr("x", function(d) { return 100;})
-	  .attr("y", function(d,i) { return margin.top + i * 15;})
+	  .attr("y", function(d,i) { return margin.top + 10 + i * 15;})
 	  .attr("height", 12.5)
 	  .attr("width",function(d) { return barLength(d.size); })
-	  .style("fill", function(d) { return d3_rgbString(color(d.name)); });
-
-	barchart.append("text")
+	  .style("fill", function(d) { return color(d.name); });
+	barchart.append("text") // add the labels at the left side of bar chart
       .attr("x", function(d) { return 95; })
-      .attr("y", function(d,i) { return margin.top + i * 15 + 6.25 + 4;})
+      .attr("y", function(d,i) { return margin.top + i * 15 + 6.25 + 14;})
       .attr("fill", "black")
       .attr("text-anchor", "end")
       .attr("font-size", "12px")
 	  .text(function(d) { return d.name; })
 	.append("title")
 	  .text(function(d) { return d.name; });
-
-	text_barchart = barchart.append("text")
+	text_barchart = barchart.append("text") // add the real number and the real percent at the right side of bar chart
       .attr("x", function(d) { return 100 + barLength(d.size) + 5; })
-      .attr("y", function(d,i) { return margin.top + i * 15 + 6.25 + 4;})
+      .attr("y", function(d,i) { return margin.top + i * 15 + 6.25 + 14;})
       .attr("fill", "black")
       .attr("text-anchor", "start")
       .attr("font-size", "12px")
-	  .text(function(d) { return d.size + "/" + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
+	  .text(function(d) { return d.size + " / " + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
   	
+	let w_legend = svg.append("g") // add the parent node of legend at the right side of the plot
+	w_legend.append("text") // add the title of legend
+	  .attr("x", width)
+      .attr("y", margin.top)
+      .attr("fill", "black")
+      .attr("text-anchor", "start")
+      .attr("font-size", "15px")
+	  .text("repositories");
+	let legend = w_legend.selectAll("rect")
+	  .data(partition(root).descendants())
+	  .enter()
+	  .filter(function(d) { // just show the repositories of the owner
+	  	if(!d.parent){ return false; }
+	  	return d.parent.data.name == owner });
+	legend.append("rect") // add the rectangles of the legend
+	  .attr("x", function(d) { return width;})
+	  .attr("y", function(d,i) { return margin.top + 10 + i * 30;})
+	  .attr("height", 25)
+	  .attr("width", 25)
+	  .style("fill", function(d) { return color(d.data.name); })
+	  .on("click", click)
+	.append("title")
+	  .text(function(d) { return d.data.name + "\nTotal bytes: " + formatNumber(d.value); });
+	legend.append("text") // add the associated text(name of repository)
+      .attr("x", function(d) { return width + 10 + 12.5 + 5; })
+      .attr("y", function(d,i) { return margin.top + i * 30 + 12.5 + 14;})
+      .attr("fill", "black")
+      .attr("text-anchor", "start")
+      .attr("font-size", "12px")
+	  .text(function(d) { return d.data.name; });
+
 	function deepCopy(arr){
 		let res = new Array();
 		for(let a in arr){
-			res.push({
-				"name":arr[a].name,
-				"size":arr[a].size
-			})
+			res.push({"name":arr[a].name,"size":arr[a].size})
 		}
 		return res;
 	}
@@ -603,26 +616,19 @@ function drawObjectiveThree(d_data,w_data,s_data,owner){
 		  })
 		.selectAll("path")
 		  .attrTween("d", function(d) { return function() { return arc(d); }; });
-		// console.log(d.parent)
 		if(!d.parent){
 			let tempData = w_data;
-			sizeWhole = 0;
-			for(let dd in tempData){
-				sizeWhole += tempData[dd].size;
-			}
-			// console.log(tempData)
+			sizeWhole = d3.sum(tempData,function(d){return d.size;});
 			barLength.domain([0, sizeWhole]).nice();
-			rect_barchart
-				.data(tempData)
+			rect_barchart.data(tempData) // change the length of the rectangle
 			    .transition()
 			    .duration(1000)
 			    .attr('width', function(d) { return barLength(d.size); });
-			text_barchart
-			    .data(tempData)
+			text_barchart.data(tempData) // change the text of the bar chart
 			    .transition()
 			    .duration(1000)
 			    .attr("x", function(d) { return 100 + barLength(d.size) + 5; })
-			    .text(function(d) { return d.size + "/" + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
+			    .text(function(d) { return d.size + " / " + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
 		}
 		else if(d.children){
 			let tempData = deepCopy(w_data);
@@ -634,19 +640,16 @@ function drawObjectiveThree(d_data,w_data,s_data,owner){
 				sizeWhole += d.data.children[c].size;
 				tempData[d_data[d.data.children[c].name]]['size'] = d.data.children[c].size;
 			}
-			// console.log(tempData)
 			barLength.domain([0, sizeWhole]).nice();
-			rect_barchart
-				.data(tempData)
+			rect_barchart.data(tempData) // change the length of the rectangle
 			    .transition()
 			    .duration(1000)
 			    .attr('width', function(d) { return barLength(d.size); });
-			text_barchart
-			    .data(tempData)
+			text_barchart.data(tempData) // change the text of the bar chart
 			    .transition()
 			    .duration(1000)
 			    .attr("x", function(d) { return 100 + barLength(d.size) + 5; })
-			    .text(function(d) { return d.size + "/" + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
+			    .text(function(d) { return d.size + " / " + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
 		}
 		else{
 			let tempData = deepCopy(w_data);
@@ -655,62 +658,19 @@ function drawObjectiveThree(d_data,w_data,s_data,owner){
 				tempData[t]['size'] = 0;
 			}
 			tempData[d_data[d.data.name]]['size'] = d.data.size;
-			// console.log(tempData)
 			barLength.domain([0, sizeWhole]).nice();
-			rect_barchart
-				.data(tempData)
+			rect_barchart.data(tempData) // change the length of the rectangle
 			    .transition()
 			    .duration(1000)
 			    .attr('width', function(d) { return barLength(d.size); });
-			text_barchart
-			    .data(tempData)
+			text_barchart.data(tempData) // change the text of the bar chart
 			    .transition()
 			    .duration(1000)
 			    .attr("x", function(d) { return 100 + barLength(d.size) + 5; })
-			    .text(function(d) { return d.size + "/" + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
+			    .text(function(d) { return d.size + " / " + (d.size/sizeWhole * 100).toFixed(2) + "%"; });
 		}
 	};
 
-	g.selectAll("path")
-	  .data(partition(root).descendants())
-	.enter().append("path")
-	  .attr("d", arc)
-	  .attr("fill-rule", "evenodd")
-      .style('stroke', '#fff')
-	  .style("fill", function(d) { return d3_rgbString(color(d.data.name)); })
-	  .on("click", click)
-	.append("title")
-	  .text(function(d) { return d.data.name + "\nTotal bytes:" + formatNumber(d.value); });
-
-	let legend = svg.append("g")
-	  .selectAll("rect")
-	  .data(partition(root).descendants())
-	  .enter()
-	  .filter(function(d) { 
-	  	if(!d.parent){
-	  		return false;
-	  	}
-	  	return d.parent.data.name == owner });
-	legend.append("rect")
-	  // .attr("class", "repository")
-	  .attr("x", function(d) { return width;})
-	  .attr("y", function(d,i) { return margin.top + i * 30;})
-	  .attr("height", 25)
-	  .attr("width", 25)
-	  .style("fill", function(d) { return d3_rgbString(color(d.data.name)); })
-	  .on("click", click)
-	.append("title")
-	  .text(function(d) { return d.data.name + "\nTotal bytes: " + formatNumber(d.value); });
-	legend.append("text")
-      .attr("x", function(d) { return width + 10 + 12.5 + 5; })
-      .attr("y", function(d,i) { return margin.top + i * 30 + 12.5 + 4;})
-      .attr("fill", "black")
-      .attr("text-anchor", "start")
-      .attr("font-size", "12px")
-	  .text(function(d) { return d.data.name; });
-
-		
-	// d3.select(self.frameElement).style("height", height + "px");
 }
 
 document.getElementById("searchBtn").onclick = function (evt) { 
@@ -761,31 +721,22 @@ document.getElementById("searchBtn").onclick = function (evt) {
 	let api_3 = "https://api.github.com/users/"+_user+"/repos";
 	d3.json(api_3,function(error, response) {
 		for(let i = 0;i<response.length;i++){
-			// console.log(data[i]);
 			let temp_child = {};
 			temp_child['name'] = response[i]['name'];
 			temp_child['children'] = new Array();
 			data_array['children'].push(temp_child);
 			d3.json(response[i]['languages_url'],function(err, respo) {
 				for(let key in respo){
-					let temp_dict = {};
-					if(key in dict){
-						dict[key] += respo[key];
-					}else{
-						dict[key] = respo[key];
-					}
-					temp_dict['name'] = key;
-					temp_dict['size'] = respo[key];
-					data_array['children'][i]['children'].push(temp_dict);
+					if(key in dict){ dict[key] += respo[key]; }
+					else{ dict[key] = respo[key]; }
+					data_array['children'][i]['children'].push({'name':key,'size':respo[key]});
 				}
+				// after all the data loaded then turn into visualizing
 				if(i==response.length-1){
 					let data_dict = new Array();
 					let dict_dict = {};
 					for(let dd in dict){
-						data_dict.push({
-							"name":dd,
-							"size":dict[dd]
-						});
+						data_dict.push({ "name":dd, "size":dict[dd] });
 						dict_dict[dd] = data_dict.length-1;
 					}
 					drawObjectiveThree(dict_dict,data_dict,data_array,_user);
